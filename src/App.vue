@@ -3,7 +3,7 @@
     <div class="navbar">
       <div class="navbar-brand"><router-link to="/"> <h2> DigitalPress </h2> </router-link></div>
       <div class="nav-links">
-        <router-link to="/" class="menu">Home</router-link>
+        <router-link to="/" class="menu" id="home-nav">Home</router-link>
         <router-link :to="{name: 'LatestView'}" class="menu">Latest</router-link>
         <router-link :to="{name: 'TellYourStories'}" class="menu">Tell Your Stories</router-link>
         <div class="dropdown">
@@ -24,6 +24,8 @@
   </nav>
 
   <router-view/>
+
+  <PageEndFooter/>
 
 </template>
 
@@ -46,7 +48,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 5px 225px 10px 215px;
+  margin: 5px;
 }
 
 .navbar-brand {
@@ -120,18 +122,57 @@ body {
   display: block;
 }
 
+@media (min-width: 769px) {
+  .navbar {
+    margin: 0 185px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    margin: 5px;
+  }
+
+  .navbar-brand {
+    text-align: center;
+    padding: 10px;
+  }
+
+  .navbar a {
+    text-align: center;
+    padding: 10px 0;
+    display: block;
+  }
+
+  .dropdown {
+    float: none;
+    display: inline-block;
+    position: relative;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: static;
+    min-width: auto;
+    box-shadow: none;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  a#home-nav {
+    margin: 0 10px 0 0;
+  }
+}
 </style>
 
 <script>
-import CategoriesView from "@/views/CategoriesView.vue";
+import PageEndFooter from './components/PageEndFooter.vue'
 
 export default {
   name: "App",
-  computed: {
-    CategoriesView() {
-      return CategoriesView
-    }
-  },
+  components: { PageEndFooter },
   data() {
     return {
       categories: [
@@ -141,10 +182,10 @@ export default {
         { name: 'Health', id: 4, urlName: 'health' }
       ],
       countries: [
-        { name: 'USA', id: 1, urlName: 'usa' },
-        { name: 'UK', id: 2, urlName: 'uk' },
-        { name: 'China', id: 3, urlName: 'china' },
-        { name: 'India', id: 4, urlName: 'india' }
+        { name: 'USA', id: 1, urlName: 'us' },
+        { name: 'Canada', id: 2, urlName: 'ca'},
+        { name: 'China', id: 3, urlName: 'cn' },
+        { name: 'India', id: 4, urlName: 'in' }
       ]
     }
   }
